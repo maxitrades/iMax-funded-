@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iMAX Funded — Affiliate Program</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #c9a227; --gold-light: #e0bc5a;
+      --black: #08070a; --surface: #0e0c10; --surface2: #131118;
+      --border: #1e1b26; --border-gold: rgba(201,162,39,0.35);
+      --text: #f0ece0; --text-muted: #7a7060; --text-dim: #3a3428;
+      --green-text: #5cd48a;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+    body { font-family: var(--font-body); background: var(--black); color: var(--text); }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 60px; background: rgba(8,7,10,0.95);
+      border-bottom: 0.5px solid var(--border-gold);
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(12px);
+    }
+    .logo { font-family: var(--font-display); font-size: 26px; font-weight: 600; color: var(--gold); }
+    .logo em { color: var(--text); font-style: normal; font-weight: 400; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 13px; color: var(--text-muted); text-decoration: none; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { background: var(--gold); color: var(--black); border: none; padding: 10px 24px; border-radius: 4px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font-body); }
+
+    /* HERO */
+    .hero {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      padding: 96px 60px; max-width: 1200px; margin: 0 auto; align-items: center;
+    }
+    .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .hero h1 { font-family: var(--font-display); font-size: 56px; font-weight: 500; line-height: 1.1; margin-bottom: 20px; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { font-size: 16px; color: var(--text-muted); line-height: 1.8; margin-bottom: 36px; max-width: 460px; }
+
+    .btn-gold { background: var(--gold); color: var(--black); border: none; padding: 15px 34px; border-radius: 6px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: var(--font-body); }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-outline { background: transparent; color: var(--gold); border: 0.5px solid var(--border-gold); padding: 15px 34px; border-radius: 6px; font-size: 15px; cursor: pointer; font-family: var(--font-body); margin-left: 12px; }
+
+    /* COMMISSION CARD */
+    .commission-card {
+      background: var(--surface); border: 0.5px solid var(--border-gold);
+      border-radius: 16px; padding: 36px;
+    }
+    .commission-card h3 { font-family: var(--font-display); font-size: 20px; font-weight: 500; margin-bottom: 24px; color: var(--text-muted); }
+    .commission-big { font-family: var(--font-display); font-size: 72px; font-weight: 600; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+    .commission-lbl { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+    .commission-items { display: flex; flex-direction: column; gap: 12px; }
+    .c-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; border-radius: 8px;
+      background: rgba(201,162,39,0.05); border: 0.5px solid var(--border-gold);
+      font-size: 13px;
+    }
+    .c-item-icon { color: var(--gold); font-size: 16px; flex-shrink: 0; }
+    .c-item-text { color: var(--text-muted); }
+    .c-item-text strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 2px; }
+
+    /* STATS */
+    .stats-section {
+      background: var(--surface2); border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border);
+      padding: 56px 60px;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1200px; margin: 0 auto; }
+    .stat { text-align: center; }
+    .stat-num { font-family: var(--font-display); font-size: 42px; font-weight: 500; color: var(--gold); }
+    .stat-lbl { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+
+    /* HOW IT WORKS */
+    .section { padding: 80px 60px; max-width: 1200px; margin: 0 auto; }
+    .section-title { font-family: var(--font-display); font-size: 38px; font-weight: 500; margin-bottom: 12px; }
+    .section-sub { font-size: 15px; color: var(--text-muted); max-width: 500px; margin-bottom: 48px; line-height: 1.75; }
+    .gold-rule { width: 48px; height: 1px; background: var(--gold); margin: 16px 0 48px; }
+
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .step {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: 10px; padding: 28px 22px;
+    }
+    .step-num { font-family: var(--font-display); font-size: 40px; font-weight: 600; color: var(--gold); opacity: 0.4; margin-bottom: 14px; }
+    .step h3 { font-family: var(--font-display); font-size: 20px; font-weight: 500; margin-bottom: 10px; }
+    .step p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+    /* TIERS */
+    .tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .tier {
+      background: var(--surface); border: 0.5px solid var(--border);
+      border-radius: 12px; padding: 28px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .tier.featured { border-color: var(--gold); }
+    .tier.featured::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--gold); }
+    .tier-label { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .tier-commission { font-family: var(--font-display); font-size: 52px; font-weight: 600; color: var(--gold); margin-bottom: 4px; }
+    .tier-per { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .tier-req { font-size: 13px; color: var(--text-muted); padding: 12px 0; border-top: 0.5px solid var(--border); margin-top: 16px; }
+    .tier-req strong { color: var(--text); font-weight: 500; display: block; margin-bottom: 4px; }
+
+    /* CALCULATOR */
+    .calc-section { background: var(--surface2); padding: 80px 60px; border-top: 0.5px solid var(--border); border-bottom: 0.5px solid var(--border); }
+    .calc-inner { max-width: 700px; margin: 0 auto; }
+    .calc-card { background: var(--surface); border: 0.5px solid var(--border-gold); border-radius: 14px; padding: 40px; }
+    .calc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+    .calc-group { }
+    .calc-label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; display: block; }
+    .calc-input {
+      width: 100%; background: var(--black); border: 0.5px solid var(--border);
+      border-radius: 6px; padding: 12px 16px; font-size: 15px; color: var(--text);
+      font-family: var(--font-body); outline: none;
+    }
+    .calc-input:focus { border-color: var(--gold); }
+    input[type="range"] {
+      width: 100%; accent-color: var(--gold); margin-top: 8px; cursor: pointer;
+    }
+    .calc-result {
+      background: rgba(201,162,39,0.06); border: 0.5px solid var(--border-gold);
+      border-radius: 10px; padding: 28px; text-align: center; margin-top: 8px;
+    }
+    .result-lbl { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .result-num { font-family: var(--font-display); font-size: 56px; font-weight: 600; color: var(--gold); }
+    .result-sub { font-size: 13px; color: var(--text-muted); margin-top: 8px; }
+
+    /* SIGNUP FORM */
+    .signup-section { padding: 80px 60px; max-width: 700px; margin: 0 auto; }
+    .signup-card {
+      background: var(--surface); border: 0.5px solid var(--border-gold);
+      border-radius: 14px; padding: 48px;
+    }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+    input[type="text"], input[type="email"], select {
+      width: 100%; background: var(--black); border: 0.5px solid var(--border);
+      border-radius: 6px; padding: 13px 16px; font-size: 14px; color: var(--text);
+      font-family: var(--font-body); outline: none; transition: border-color 0.2s;
+    }
+    input:focus, select:focus { border-color: var(--gold); }
+    select option { background: var(--surface); }
+    .btn-full { width: 100%; background: var(--gold); color: var(--black); border: none; padding: 15px; border-radius: 6px; font-size: 15px; font-weight: 500; cursor: pointer; font-family: var(--font-body); margin-top: 8px; }
+    .btn-full:hover { background: var(--gold-light); }
+    .form-note { font-size: 12px; color: var(--text-dim); margin-top: 14px; text-align: center; line-height: 1.6; }
+
+    .success-msg { background: rgba(42,122,74,0.15); border: 0.5px solid rgba(92,212,138,0.3); border-radius: 8px; padding: 16px; font-size: 14px; color: var(--green-text); text-align: center; display: none; margin-top: 16px; }
+
+    footer { padding: 32px 60px; border-top: 0.5px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-logo { font-family: var(--font-display); font-size: 20px; color: var(--gold); }
+    .footer-copy { font-size: 12px; color: var(--text-dim); }
+
+    @media (max-width: 900px) {
+      nav { padding: 18px 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+      .hero h1 { font-size: 40px; }
+      .stats-section { padding: 48px 24px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 60px 24px; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); }
+      .tiers-grid { grid-template-columns: 1fr; }
+      .calc-section { padding: 60px 24px; }
+      .calc-row { grid-template-columns: 1fr; }
+      .signup-section { padding: 60px 24px; }
+      .signup-card { padding: 32px 24px; }
+      footer { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">iMAX <em>Funded</em></div>
+    <div class="nav-links">
+      <a href="imax-funded.html">Home</a>
+      <a href="faq.html">FAQ</a>
+      <a href="login.html">Login</a>
+    </div>
+    <button class="nav-cta" onclick="document.getElementById('affiliateSignup').scrollIntoView({behavior:'smooth'})">Join affiliate program</button>
+  </nav>
+
+  <!-- HERO -->
+  <div style="border-bottom: 0.5px solid var(--border);">
+    <div class="hero">
+      <div>
+        <div class="section-label">Affiliate program</div>
+        <h1>Earn while traders <span>grow.</span></h1>
+        <p>Share iMAX Funded with your audience and earn up to 30% commission on every challenge purchase. No cap, no expiry, paid monthly.</p>
+        <div>
+          <button class="btn-gold" onclick="document.getElementById('affiliateSignup').scrollIntoView({behavior:'smooth'})">Apply now — it's free</button>
+          <button class="btn-outline" onclick="document.getElementById('calcSection').scrollIntoView({behavior:'smooth'})">Calculate earnings</button>
+        </div>
+      </div>
+      <div class="commission-card">
+        <h3>Your earning potential</h3>
+        <div class="commission-big">30%</div>
+        <div class="commission-lbl">Maximum commission per sale</div>
+        <div class="commission-items">
+          <div class="c-item">
+            <div class="c-item-icon">&#9670;</div>
+            <div class="c-item-text">
+              <strong>Lifetime cookie tracking</strong>
+              Earn on every purchase your referral makes — forever
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-item-icon">&#9650;</div>
+            <div class="c-item-text">
+              <strong>Monthly payouts</strong>
+              Commissions paid on the 1st of every month via crypto or bank
+            </div>
+          </div>
+          <div class="c-item">
+            <div class="c-item-icon">&#9632;</div>
+            <div class="c-item-text">
+              <strong>Real-time dashboard</strong>
+              Track clicks, conversions, and earnings live
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-section">
+    <div class="stats-grid">
+      <div class="stat"><div class="stat-num">$2.1M+</div><div class="stat-lbl">Paid to affiliates total</div></div>
+      <div class="stat"><div class="stat-num">1,400+</div><div class="stat-lbl">Active affiliates globally</div></div>
+      <div class="stat"><div class="stat-num">30%</div><div class="stat-lbl">Max commission rate</div></div>
+      <div class="stat"><div class="stat-num">Monthly</div><div class="stat-lbl">Guaranteed payout cycle</div></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="section">
+    <div class="section-label">The process</div>
+    <div class="section-title">How the affiliate program works</div>
+    <div class="gold-rule"></div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Apply for free</h3>
+        <p>Fill out the form below. No minimum following required — anyone can apply and get approved within 48 hours.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Get your link</h3>
+        <p>Receive your unique referral link and marketing materials — banners, videos, and copy — from your affiliate dashboard.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Share and convert</h3>
+        <p>Share with your audience via YouTube, Twitter, TikTok, Discord, email — wherever your community lives.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Earn every month</h3>
+        <p>Get paid a percentage of every challenge purchased through your link. Lifetime cookie means you earn on every return purchase too.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIERS -->
+  <div style="padding: 0 60px 80px; max-width: 1200px; margin: 0 auto;">
+    <div class="section-label">Commission tiers</div>
+    <div class="section-title">The more you refer, the more you earn</div>
+    <div class="gold-rule"></div>
+    <div class="tiers-grid">
+      <div class="tier">
+        <div class="tier-label">Starter</div>
+        <div class="tier-commission">20%</div>
+        <div class="tier-per">commission per sale</div>
+        <div class="tier-req"><strong>0 – 9 sales/month</strong>Perfect for creators just starting out</div>
+      </div>
+      <div class="tier featured">
+        <div class="tier-label">Pro</div>
+        <div class="tier-commission">25%</div>
+        <div class="tier-per">commission per sale</div>
+        <div class="tier-req"><strong>10 – 49 sales/month</strong>For consistent referrers with an audience</div>
+      </div>
+      <div class="tier">
+        <div class="tier-label">Elite</div>
+        <div class="tier-commission">30%</div>
+        <div class="tier-per">commission per sale</div>
+        <div class="tier-req"><strong>50+ sales/month</strong>Top affiliates. Priority support & custom bonuses</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="calc-section" id="calcSection">
+    <div class="calc-inner">
+      <div class="section-label" style="text-align:center">Earnings calculator</div>
+      <div class="section-title" style="text-align:center;font-size:34px;">How much could you earn?</div>
+      <div style="text-align:center;font-size:14px;color:var(--text-muted);margin-bottom:36px;">Adjust the sliders to estimate your monthly affiliate income.</div>
+      <div class="calc-card">
+        <div class="calc-row">
+          <div class="calc-group">
+            <label>Referrals per month: <span id="refCount" style="color:var(--gold);font-weight:500;">20</span></label>
+            <input type="range" min="1" max="200" value="20" oninput="calcEarnings()" id="refSlider" />
+          </div>
+          <div class="calc-group">
+            <label>Avg. challenge price ($): <span id="priceVal" style="color:var(--gold);font-weight:500;">$79</span></label>
+            <input type="range" min="49" max="199" value="79" step="10" oninput="calcEarnings()" id="priceSlider" />
+          </div>
+        </div>
+        <div class="calc-group" style="margin-bottom:28px;">
+          <label>Your commission tier: <span id="tierLabel" style="color:var(--gold);font-weight:500;">Starter (20%)</span></label>
+          <input type="range" min="20" max="30" value="20" step="5" oninput="calcEarnings()" id="rateSlider" />
+        </div>
+        <div class="calc-result">
+          <div class="result-lbl">Estimated monthly earnings</div>
+          <div class="result-num" id="resultNum">$316</div>
+          <div class="result-sub" id="resultSub">20 referrals × $79 × 20% commission</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div class="signup-section" id="affiliateSignup">
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="section-label">Apply now</div>
+      <div class="section-title" style="font-size:36px;">Join the iMAX affiliate program</div>
+      <div style="font-size:14px;color:var(--text-muted);margin-top:8px;">Free to join. Approved within 48 hours. Start earning immediately.</div>
+    </div>
+    <div class="signup-card">
+      <div class="form-group">
+        <label>Full name</label>
+        <input type="text" id="affName" placeholder="Your full name" />
+      </div>
+      <div class="form-group">
+        <label>Email address</label>
+        <input type="email" id="affEmail" placeholder="you@example.com" />
+      </div>
+      <div class="form-group">
+        <label>Primary platform / channel</label>
+        <select id="affPlatform">
+          <option value="">Select your main platform</option>
+          <option>YouTube</option>
+          <option>TikTok</option>
+          <option>Twitter / X</option>
+          <option>Instagram</option>
+          <option>Discord community</option>
+          <option>Newsletter / email list</option>
+          <option>Website / blog</option>
+          <option>Telegram</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Audience size (approximate)</label>
+        <select id="affAudience">
+          <option value="">Select audience size</option>
+          <option>Under 1,000</option>
+          <option>1,000 – 10,000</option>
+          <option>10,000 – 50,000</option>
+          <option>50,000 – 200,000</option>
+          <option>200,000+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Link to your channel / profile</label>
+        <input type="text" id="affLink" placeholder="https://..." />
+      </div>
+      <button class="btn-full" onclick="submitAffiliate()">Submit application</button>
+      <div class="success-msg" id="successMsg">&#10003; Application received! We'll review it and get back to you within 48 hours. Check your email for confirmation.</div>
+      <div class="form-note">By applying you agree to iMAX Funded's affiliate terms. Commissions are paid monthly. iMAX reserves the right to approve or decline applications.</div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">iMAX Funded</div>
+    <div style="display:flex;gap:24px;">
+      <a href="imax-funded.html" style="font-size:13px;color:var(--text-muted);text-decoration:none;">Home</a>
+      <a href="faq.html" style="font-size:13px;color:var(--text-muted);text-decoration:none;">FAQ</a>
+      <a href="login.html" style="font-size:13px;color:var(--text-muted);text-decoration:none;">Login</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 iMAX Funded. All rights reserved.</div>
+  </footer>
+
+  <script>
+    function calcEarnings() {
+      const refs = parseInt(document.getElementById('refSlider').value);
+      const price = parseInt(document.getElementById('priceSlider').value);
+      const rate = parseInt(document.getElementById('rateSlider').value);
+      const tierMap = {20:'Starter (20%)', 25:'Pro (25%)', 30:'Elite (30%)'};
+      document.getElementById('refCount').textContent = refs;
+      document.getElementById('priceVal').textContent = '$' + price;
+      document.getElementById('tierLabel').textContent = tierMap[rate] || rate + '%';
+      const earning = Math.round(refs * price * rate / 100);
+      document.getElementById('resultNum').textContent = '$' + earning.toLocaleString();
+      document.getElementById('resultSub').textContent = refs + ' referrals × $' + price + ' × ' + rate + '% commission';
+    }
+    function submitAffiliate() {
+      const name = document.getElementById('affName').value;
+      const email = document.getElementById('affEmail').value;
+      if (!name || !email) { alert('Please enter your name and email.'); return; }
+      document.getElementById('successMsg').style.display = 'block';
+      document.querySelector('.btn-full').disabled = true;
+      document.querySelector('.btn-full').style.opacity = '0.5';
+    }
+    calcEarnings();
+  </script>
+</body>
+</html>
